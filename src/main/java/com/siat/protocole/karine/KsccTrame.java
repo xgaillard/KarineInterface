@@ -17,19 +17,9 @@ public class KsccTrame {
 	boolean ready_b;
 
 	private enum Retour {
-		ERROR      (0),
-		OK         (1),
-		INCOMPLETE (2);
-		final int valeur;
-		private Retour(int val)
-		{
-			valeur=val;
-		}
-		public int value()
-		{
-			return valeur;
-		}
-
+		ERROR      ,
+		OK         ,
+		INCOMPLETE ;
 	}
 	static public enum Type {
 		CMD_CONFIG_WRITE    (0,"CMD_CONFIG_WRITE"),
