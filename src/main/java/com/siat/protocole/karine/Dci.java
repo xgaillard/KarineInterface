@@ -1,3 +1,6 @@
+/**
+ * Ajout d'un entete javadoc
+ */
 package com.siat.protocole.karine;
 
 import java.text.SimpleDateFormat;
