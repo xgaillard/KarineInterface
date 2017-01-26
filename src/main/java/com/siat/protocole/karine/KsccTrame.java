@@ -78,37 +78,37 @@ public class KsccTrame {
 			int size_uw,
 			byte mainIn_uc)
 	{
-		Integer valeur=null;
+		Integer valeur = null;
 		Retour result_dw = Retour.ERROR;
 		int msgSize_uw;
 		int bcc_uw = 0;
 		int k_uw;
-		int cptSkip_uw=0;
+		int cptSkip_uw = 0;
 
 		// *** Calage sur le STX
-		while( size_uw > 0 && buffer_puc[cptSkip_uw] != STX ) {
+		while (size_uw > 0 && buffer_puc[cptSkip_uw] != STX) {
 			size_uw--;
 			cptSkip_uw++;
 		}
 
-		if( size_uw >= 8 ) {
-			msgSize_uw = ((int)(buffer_puc[cptSkip_uw+TRAME_ISIZE0]+256)%256 )*256 + (((int)buffer_puc[cptSkip_uw+TRAME_ISIZE1]+256)%256) + 3;
-			mainId = buffer_puc[cptSkip_uw+3];
-			anzId_uc = buffer_puc[cptSkip_uw+4];
-			cmdId = Type.getEnum(buffer_puc[cptSkip_uw+5]);
+		if (size_uw >= 8) {
+			msgSize_uw = ((int) (buffer_puc[cptSkip_uw + TRAME_ISIZE0] + 256) % 256) * 256
+					+ (((int) buffer_puc[cptSkip_uw + TRAME_ISIZE1] + 256) % 256) + 3;
+			mainId = buffer_puc[cptSkip_uw + 3];
+			anzId_uc = buffer_puc[cptSkip_uw + 4];
+			cmdId = Type.getEnum(buffer_puc[cptSkip_uw + 5]);
 
-			if( (mainIn_uc != mainId)&&(mainIn_uc!=0) ) {
+			if ((mainIn_uc != mainId) && (mainIn_uc != 0)) {
 				result_dw = Retour.ERROR;
-			} else if( size_uw >= msgSize_uw + 2 ) {
+			} else if (size_uw >= msgSize_uw + 2) {
 				bcc_uw = 0;
-				for( k_uw = 0; k_uw < msgSize_uw; k_uw++ ) {
-					bcc_uw += ((int)buffer_puc[cptSkip_uw+k_uw]+256)%256;
+				for (k_uw = 0; k_uw < msgSize_uw; k_uw++) {
+					bcc_uw += ((int) buffer_puc[cptSkip_uw + k_uw] + 256) % 256;
 				}
 
-				if( buffer_puc[cptSkip_uw+msgSize_uw] == (byte) (bcc_uw >> 8)
-						&& buffer_puc[cptSkip_uw+msgSize_uw+1] == (byte) (bcc_uw & 0xFF) )
-				{
-					recopie( buffer_auc, buffer_puc,0,cptSkip_uw, msgSize_uw );
+				if (buffer_puc[cptSkip_uw + msgSize_uw] == (byte) (bcc_uw >> 8)
+						&& buffer_puc[cptSkip_uw + msgSize_uw + 1] == (byte) (bcc_uw & 0xFF)) {
+					recopie(buffer_auc, buffer_puc, 0, cptSkip_uw, msgSize_uw);
 					this.size_uw = msgSize_uw;
 					ready_b = true;
 					result_dw = Retour.OK;
@@ -122,22 +122,20 @@ public class KsccTrame {
 			result_dw = Retour.INCOMPLETE;
 		}
 
-		if( result_dw == Retour.OK ) 
-		{
+		if (result_dw == Retour.OK) {
 			toString();
-			valeur=null;
-		}
-		else if(result_dw==Retour.ERROR)
-		{
-			valeur=new Integer(-1);
-		}
-		else
-		{
-			valeur=new Integer(cptSkip_uw);
+			valeur = null;
+		} else if (result_dw == Retour.ERROR) {
+			valeur = new Integer(-1);
+		} else {
+			valeur = new Integer(cptSkip_uw);
 		}
 
-		/* On retourne le nombre de caractères que l'on a saute au debut avant de trouver un STX. */
-		/* Cette info est utilisée une fois le message complet trouvé. */	
+		/*
+		 * On retourne le nombre de caractères que l'on a saute au debut avant
+		 * de trouver un STX.
+		 */
+		/* Cette info est utilisée une fois le message complet trouvé. */
 		return valeur;
 	}
 
