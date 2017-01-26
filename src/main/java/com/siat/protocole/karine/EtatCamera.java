@@ -4,28 +4,29 @@
 package com.siat.protocole.karine;
 
 public enum EtatCamera {
-	OK(0,"0k"),
-ABSENCE_SIGNAL (1,"Absence signal"),
-CAMERA_ENCRASSEE(2,"Camera encrassee"),
-CAMERA_DEPLACEE(4,"Camera deplacee"),
-ERREUR_INTERNE(8,"Erreur interne analyseur");
+	OK(0, "0k"), 
+	ABSENCE_SIGNAL(1, "Absence signal"), 
+	CAMERA_ENCRASSEE(2, "Camera encrassee"), 
+	CAMERA_DEPLACEE(4,"Camera deplacee"), 
+	ERREUR_INTERNE(8, "Erreur interne analyseur");
+	
 	private int valeur;
-	private String info="";
-	private EtatCamera(int val,String inf)
-	{
-		valeur=val;
-		info=inf;
+	private String info = "";
+
+	private EtatCamera(int val, String inf) {
+		valeur = val;
+		info = inf;
 	}
-	public int getValue()
-	{
+
+	public int getValue() {
 		return valeur;
 	}
-	public boolean isAffected(int val)
-	{
-		return (valeur&val)!=0;
+
+	public boolean isAffected(int val) {
+		return (valeur & val) != 0;
 	}
-	public String toString()
-	{
+
+	public String toString() {
 		return info;
 	}
 
