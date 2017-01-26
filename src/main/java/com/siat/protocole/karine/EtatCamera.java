@@ -1,6 +1,7 @@
 /**
  * Un peu de java doc
  */
+
 package com.siat.protocole.karine;
 
 public enum EtatCamera {
