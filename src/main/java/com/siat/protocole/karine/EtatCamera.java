@@ -6,8 +6,8 @@ package com.siat.protocole.karine;
 public enum EtatCamera {
 	OK(0,"0k"),
 ABSENCE_SIGNAL (1,"Absence signal"),
-CAMERA_ENCRASSEE(2,"Caméra encrassée"),
-CAMERA_DEPLACEE(4,"Caméra déplacée"),
+CAMERA_ENCRASSEE(2,"Camera encrassee"),
+CAMERA_DEPLACEE(4,"Camera deplacee"),
 ERREUR_INTERNE(8,"Erreur interne analyseur");
 	private int valeur;
 	private String info="";
